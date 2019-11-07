@@ -42,7 +42,7 @@ public class Battleships {
         boardPl1[8][9] = true;
         boardPl1[9][9] = true;
 
-        // lodka 1
+        // lodka 2
         boardPl1[8][6] = true;
         boardPl1[8][7] = true;
 
@@ -75,57 +75,53 @@ public class Battleships {
         boardPl2[8][9] = true;
         boardPl2[9][9] = true;
 
-        // lodka 1
+        // lodka 2
         boardPl2[8][6] = true;
         boardPl2[8][7] = true;
     }
 
-    public static void getGhostBoard() {
-        for (int row = 0; row < 10; row++) {
-            for (int column = 0; column < 10; column++) {
-                ghostBoardPl1[column][row] = false;
-                ghostBoardPl2[column][row] = false;
-            }
-        }
-    }
-
     public static void drawPl1() {
+        System.out.println("\n\n\n\n\n\n----------------\n---- Hrac 1 ----\n----------------");
         for (int row = 0; row < 10; row++) {
             for (int column = 0; column < 10; column++) {
-                if (boardPl1[column][row] == true && ghostBoardPl1[column][row] == true)                     
-                    System.out.print("# ");  
+                if (boardPl1[column][row] == true && ghostBoardPl1[column][row] == true)
+                    System.out.print("# ");
                 else if (boardPl1[column][row] == false && ghostBoardPl1[column][row] == true)
                     System.out.print("~ ");
                 else
                     System.out.print("- ");
-            } System.out.println("");
-        } System.out.println("\n-------------------");
+            }
+            System.out.println("");
+        }
+        System.out.println("\n-------------------\n");
     }
 
     private static void drawPl2() {
+        System.out.println("\n\n\n\n\n\n----------------\n---- Hrac 2 ----\n----------------");
         for (int row = 0; row < 10; row++) {
             for (int column = 0; column < 10; column++) {
-                if (boardPl2[column][row] == true && ghostBoardPl2[column][row] == true)                     
-                    System.out.print("# ");  
+                if (boardPl2[column][row] == true && ghostBoardPl2[column][row] == true)
+                    System.out.print("# ");
                 else if (boardPl2[column][row] == false && ghostBoardPl2[column][row] == true)
                     System.out.print("~ ");
                 else
                     System.out.print("- ");
-            } System.out.println("");
-        } System.out.println("\n-------------------");
+            }
+            System.out.println("");
+        }
+        System.out.println("\n-------------------\n");
     }
 
     public static void shootPl1() {
         int cordX, cordY;
         Scanner sc = new Scanner(System.in);
 
-        Battleships.getGhostBoard();
         Battleships.drawPl1();
         do {
             System.out.print("\nZadej x: ");
-            cordX = sc.nextInt() - 1; 
+            cordX = sc.nextInt() - 1;
             System.out.print("Zadej y: ");
-            cordY = sc.nextInt() - 1; 
+            cordY = sc.nextInt() - 1;
             System.out.println("");
 
             if (boardPl1[cordY][cordX] == true)
@@ -140,13 +136,12 @@ public class Battleships {
         int cordX, cordY;
         Scanner sc = new Scanner(System.in);
 
-        Battleships.getGhostBoard();
         Battleships.drawPl2();
         do {
             System.out.print("\nZadej x: ");
-            cordX = sc.nextInt() - 1; 
+            cordX = sc.nextInt() - 1;
             System.out.print("Zadej y: ");
-            cordY = sc.nextInt() - 1; 
+            cordY = sc.nextInt() - 1;
             System.out.println("");
 
             if (boardPl2[cordY][cordX] == true)
@@ -160,8 +155,8 @@ public class Battleships {
     public static int closeGame(int end) {
         for (int row = 0; row < 10; row++) {
             for (int column = 0; column < 10; column++) {
-                if ((boardPl1[column][row] == true && ghostBoardPl1[column][row] == true) || 
-                (boardPl2[column][row] == true && ghostBoardPl2[column][row] == true))
+                if ((boardPl1[column][row] == true && ghostBoardPl1[column][row] == true)
+                        || (boardPl2[column][row] == true && ghostBoardPl2[column][row] == true))
                     end = 0;
             }
         }
@@ -169,11 +164,10 @@ public class Battleships {
     }
 
     public static void main(String[] args) {
+        Battleships battleships = new Batttleships();
         Battleships.createBattleships();
         do {
-            System.out.println("----------------\n---- Hrac 1 ----\n----------------");
             Battleships.shootPl1();
-            System.out.println("----------------\n---- Hrac 2 ----\n----------------");
             Battleships.shootPl2();
         } while (Battleships.closeGame(0) == 0);
     }
